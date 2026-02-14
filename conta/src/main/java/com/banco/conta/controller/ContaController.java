@@ -19,10 +19,14 @@ public class ContaController {
         this.service = service;
     }
 
-
     @GetMapping
-    public ResponseEntity<List<Conta>> buscarConta(){
-        return ResponseEntity.ok(service.buscarConta());
+    public ResponseEntity<List<Conta>> buscarTodos(){
+        return ResponseEntity.ok(service.buscarTodos());
+    }
+
+    @GetMapping(params = "id")
+    public ResponseEntity<Conta> buscarPorId(@RequestParam Long id){
+        return ResponseEntity.ok(service.buscarPorId(id));
     }
 
     @PostMapping

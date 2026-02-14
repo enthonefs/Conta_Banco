@@ -5,6 +5,7 @@ import com.banco.conta.repository.ContaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ContaService {
@@ -27,6 +28,7 @@ public class ContaService {
                 .username(conta.getUsername() != null ? conta.getUsername() : contaEntity.getUsername())
                 .password(conta.getPassword() != null ? conta.getPassword() : contaEntity.getUsername())
                 .saldo(conta.getSaldo() != 0 ? conta.getSaldo() : contaEntity.getSaldo())
+                .numero(conta.getNumero() != 0 ? conta.getNumero() : contaEntity.getNumero())
                 .id(contaEntity.getId())
                 .build();
 
@@ -34,13 +36,20 @@ public class ContaService {
 
     }
 
-    public List<Conta> buscarConta(){
+    public List<Conta> buscarTodos(){
         return repository.findAll();
 
     }
 
     public void deletarConta(Long id){
         repository.deleteById(id);
+
+    }
+
+    public Conta buscarPorId(Long id){
+        return repository.findById(id).orElseThrow(
+                () -> new RuntimeException("Id indisponível")
+        );
 
     }
 }

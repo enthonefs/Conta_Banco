@@ -19,6 +19,8 @@ public class Conta {
     private String username;
     @Column(name = "password")
     private String password;
+    @Column(name = "numero")
+    private int numero;
     @Column(name = "saldo")
     private double saldo;
 
