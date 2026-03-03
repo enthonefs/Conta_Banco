@@ -2,6 +2,7 @@ package com.banco.conta.controller;
 
 import com.banco.conta.model.Conta;
 import com.banco.conta.service.ContaService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,40 +11,37 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/conta")
+@RequiredArgsConstructor
 public class ContaController {
 
     @Autowired
     private final ContaService service;
-
-    public ContaController(ContaService service) {
-        this.service = service;
-    }
 
     @GetMapping
     public ResponseEntity<List<Conta>> buscarTodos(){
         return ResponseEntity.ok(service.buscarTodos());
     }
 
-    @GetMapping(params = "id")
-    public ResponseEntity<Conta> buscarPorId(@RequestParam Long id){
+    @GetMapping("/{id}")
+    public ResponseEntity<Conta> buscarPorId(@PathVariable Long id){
         return ResponseEntity.ok(service.buscarPorId(id));
     }
 
-    @PostMapping
-    public ResponseEntity<Void> adicionarConta(@RequestBody Conta conta){
-        service.adicionarConta(conta);
+    @PostMapping("/{id}")
+    public ResponseEntity<Void> adicionarConta(@PathVariable Long id, @RequestBody Conta conta){
+        service.adicionarConta(id, conta);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping
-    public ResponseEntity<Void> atualizarConta(@RequestParam Long id,
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> atualizarConta(@PathVariable Long id,
                                                @RequestBody Conta conta){
         service.atualizarConta(id, conta);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping
-    public ResponseEntity<Void> deletarConta(@RequestParam Long id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarConta(@PathVariable Long id){
         service.deletarConta(id);
         return ResponseEntity.ok().build();
     }

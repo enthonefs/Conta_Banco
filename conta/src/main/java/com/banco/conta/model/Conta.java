@@ -15,13 +15,14 @@ public class Conta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "username")
-    private String username;
-    @Column(name = "password")
-    private String password;
+
     @Column(name = "numero")
     private int numero;
     @Column(name = "saldo")
     private double saldo;
+
+    @JoinColumn(name = "usuario_id")
+    @OneToOne
+    private User user;
 
 }

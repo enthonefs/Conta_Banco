@@ -6,15 +6,18 @@
       <option name="ignoredModules">
         <list>
           <option value="conta" />
+          <option value="conta" />
         </list>
       </option>
       <option name="ignoredPackages">
         <list>
           <option value="org.assertj:assertj-core:3.27.6" />
+          <option value="org.apache.tomcat.embed:tomcat-embed-core:11.0.15" />
         </list>
       </option>
       <option name="ignoredReasons">
         <list>
+          <option value="Not exploitable" />
           <option value="Not exploitable" />
         </list>
       </option>
